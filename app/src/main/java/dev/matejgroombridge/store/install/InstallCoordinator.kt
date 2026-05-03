@@ -33,6 +33,7 @@ class InstallCoordinator(context: Context) {
     fun installPermissionIntent() = installer.installPermissionSettingsIntent()
     fun launchAppIntent(pkg: String) = installer.launchIntent(pkg)
     fun openAppInfoIntent(pkg: String) = installer.openAppInfo(pkg)
+    fun uninstallIntent(pkg: String) = installer.uninstallIntent(pkg)
 
     /**
      * Full pipeline: download → SHA-256 verify → return install Intent.

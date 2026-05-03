@@ -56,6 +56,18 @@ class StoreViewModel(
     /** Per-package transient action (download/verify/install). */
     val actions: StateFlow<Map<String, ActionState>> = installs.state
 
+    /**
+     * Queue of packages waiting to be installed sequentially via the system
+     * installer. Populated by [installAllUpdates]; the head is launched by the
+     * activity, and as each install returns the activity calls [popInstallQueue]
+     * to pull the next one.
+     *
+     * Sequential because Android only surfaces one install dialog at a time —
+     * trying to launch a second while the first is open just gets dropped.
+     */
+    private val _installQueue = MutableStateFlow<List<String>>(emptyList())
+    val installQueue: StateFlow<List<String>> = _installQueue.asStateFlow()
+
     /** User settings (theme, manifest URL, etc.) */
     val settingsFlow: StateFlow<SettingsRepository.Settings> = settings.settings.stateIn(
         viewModelScope, SharingStarted.Eagerly,
@@ -102,6 +114,27 @@ class StoreViewModel(
     fun setHidden(packageName: String, hidden: Boolean) = viewModelScope.launch {
         settings.setHidden(packageName, hidden)
     }
+
+    /** Enqueue every app currently in [InstallState.UpdateAvailable]. */
+    fun installAllUpdates() {
+        val pending = _ui.value.installStates
+            .filterValues { it is InstallState.UpdateAvailable }
+            .keys
+            .toList()
+        _installQueue.value = pending
+    }
+
+    /** Pop the next package off the install queue (called by the activity once
+     *  the previous install dialog has returned). Returns null when empty. */
+    fun popInstallQueue(): String? {
+        val current = _installQueue.value
+        if (current.isEmpty()) return null
+        val next = current.first()
+        _installQueue.value = current.drop(1)
+        return next
+    }
+
+    fun clearInstallQueue() { _installQueue.value = emptyList() }
 
     companion object {
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {

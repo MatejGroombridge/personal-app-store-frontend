@@ -47,12 +47,21 @@ class UpdateCheckWorker(
         }
 
         if (updates.isNotEmpty()) {
-            notifyUpdates(ctx, updates.size, updates.joinToString(", ") { it.first.display_name })
+            notifyUpdates(
+                ctx = ctx,
+                count = updates.size,
+                names = updates.joinToString(", ") { it.first.display_name },
+                singlePackage = updates.singleOrNull()?.first?.package_name,
+            )
         }
         return Result.success()
     }
 
-    private fun notifyUpdates(ctx: Context, count: Int, names: String) {
+    /**
+     * @param singlePackage when only one update is available, the package name
+     *   to deep-link straight to via [MainActivity.EXTRA_DEEP_LINK_PACKAGE].
+     */
+    private fun notifyUpdates(ctx: Context, count: Int, names: String, singlePackage: String?) {
         val nm = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val ch = NotificationChannel(CHANNEL_ID, "App updates",
@@ -61,9 +70,15 @@ class UpdateCheckWorker(
             }
             nm.createNotificationChannel(ch)
         }
+        val deepLinkIntent = Intent(ctx, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .apply {
+                if (singlePackage != null) {
+                    putExtra(MainActivity.EXTRA_DEEP_LINK_PACKAGE, singlePackage)
+                }
+            }
         val pi = PendingIntent.getActivity(
-            ctx, 0,
-            Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            ctx, 0, deepLinkIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
         val title = if (count == 1) "1 app update available" else "$count app updates available"
@@ -74,6 +89,8 @@ class UpdateCheckWorker(
             .setStyle(NotificationCompat.BigTextStyle().bigText(names))
             .setContentIntent(pi)
             .setAutoCancel(true)
+            // Number badge on the launcher icon (Android 8+).
+            .setNumber(count)
             .build()
         nm.notify(NOTIFICATION_ID, notification)
     }

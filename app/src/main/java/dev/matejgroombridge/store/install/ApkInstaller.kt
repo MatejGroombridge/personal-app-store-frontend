@@ -41,6 +41,22 @@ class ApkInstaller(private val context: Context) {
             .setData(Uri.parse("package:$packageName"))
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
+    /**
+     * Pops the system "Uninstall this app?" confirmation directly, no detour
+     * through App Info. Returns null if [packageName] isn't installed (would
+     * surface as a useless dialog otherwise).
+     */
+    fun uninstallIntent(packageName: String): Intent? {
+        // Probe install presence so we don't fire an intent that opens an
+        // empty system page when the package isn't actually there.
+        val pm = context.packageManager
+        val isInstalled = runCatching { pm.getPackageInfo(packageName, 0) }.isSuccess
+        if (!isInstalled) return null
+        return Intent(Intent.ACTION_DELETE)
+            .setData(Uri.parse("package:$packageName"))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+
     /** Launch the installed app, if it's actually installed. */
     fun launchIntent(packageName: String): Intent? =
         context.packageManager.getLaunchIntentForPackage(packageName)?.apply {

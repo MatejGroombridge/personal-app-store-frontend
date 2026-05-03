@@ -62,6 +62,7 @@ fun AppDetailScreen(
     packageName: String,
     onBack: () -> Unit,
     onPrimaryAction: () -> Unit,
+    onUninstall: () -> Unit,
 ) {
     val state by vm.ui.collectAsState()
     val actions by vm.actions.collectAsState()
@@ -71,6 +72,7 @@ fun AppDetailScreen(
     val install = state.installStates[packageName] ?: InstallState.NotInstalled
     val action = actions[packageName] ?: ActionState.Idle
     val isHidden = packageName in settings.hiddenPackages
+    val isInstalled = install is InstallState.Installed || install is InstallState.UpdateAvailable
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -110,7 +112,9 @@ fun AppDetailScreen(
             entry = entry,
             install = install,
             action = action,
+            isInstalled = isInstalled,
             onPrimaryAction = onPrimaryAction,
+            onUninstall = onUninstall,
             padding = padding,
         )
     }
@@ -121,7 +125,9 @@ private fun DetailContent(
     entry: AppEntry,
     install: InstallState,
     action: ActionState,
+    isInstalled: Boolean,
     onPrimaryAction: () -> Unit,
+    onUninstall: () -> Unit,
     padding: PaddingValues,
 ) {
     Column(
@@ -173,9 +179,16 @@ private fun DetailContent(
         Spacer(Modifier.height(20.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            // Secondary action: only meaningful for apps that are actually
+            // installed, and only sensible while no install/update is in flight.
+            if (isInstalled && action is ActionState.Idle) {
+                androidx.compose.material3.TextButton(onClick = onUninstall) {
+                    Text("Uninstall")
+                }
+            }
             ActionButton(install, action, onPrimaryAction)
         }
 
