@@ -1,8 +1,24 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+}
+
+// Load keystore.properties (local dev). In CI, environment variables take precedence.
+// The file should look like:
+//   storeFile=/Users/you/Documents/release.jks
+//   storePassword=...
+//   keyAlias=main
+//   keyPassword=...
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties().apply {
+    if (keystorePropertiesFile.exists()) {
+        load(FileInputStream(keystorePropertiesFile))
+    }
 }
 
 android {
@@ -27,6 +43,29 @@ android {
         )
     }
 
+    signingConfigs {
+        create("release") {
+            // CI path: keystore is decoded by the workflow into a temp file, and
+            // its location + passwords are passed in as env vars.
+            val ciStorePath = System.getenv("KEYSTORE_PATH")
+            if (ciStorePath != null) {
+                storeFile = file(ciStorePath)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            } else if (keystorePropertiesFile.exists()) {
+                // Local dev path: read from keystore.properties (gitignored).
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+            }
+            // If neither is present, this signing config remains unconfigured and
+            // assembleRelease will fail clearly rather than silently sign with the
+            // debug key.
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -39,9 +78,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Signing config will be wired up by the GitHub Actions pipeline.
-            // For local release builds, configure ~/.gradle/gradle.properties with:
-            //   STORE_FILE=..., STORE_PASSWORD=..., KEY_ALIAS=..., KEY_PASSWORD=...
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

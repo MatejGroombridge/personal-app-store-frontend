@@ -28,15 +28,17 @@ jobs:
       - name: Decode keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $RUNNER_TEMP/release.jks
-          echo "STORE_FILE=$RUNNER_TEMP/release.jks" >> $GITHUB_ENV
+          echo "KEYSTORE_PATH=$RUNNER_TEMP/release.jks" >> $GITHUB_ENV
 
       # ── Build signed release APK ──────────────────────────────
+      # The env var names below MUST match what app/build.gradle.kts reads in
+      # its signingConfigs { create("release") { ... } } block.
       - name: Assemble release APK
         env:
-          MATEJ_STORE_FILE:     ${{ env.STORE_FILE }}
-          MATEJ_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          MATEJ_KEY_ALIAS:      ${{ secrets.KEY_ALIAS }}
-          MATEJ_KEY_PASSWORD:   ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PATH:     ${{ env.KEYSTORE_PATH }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS:         ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD:      ${{ secrets.KEY_PASSWORD }}
         run: ./gradlew :app:assembleRelease --no-daemon
 
       # ── Compute metadata ──────────────────────────────────────
