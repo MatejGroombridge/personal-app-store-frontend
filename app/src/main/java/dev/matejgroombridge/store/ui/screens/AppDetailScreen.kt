@@ -139,7 +139,7 @@ private fun DetailContent(
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
-                    "v${entry.version_name}" + (entry.category?.let { " • $it" } ?: ""),
+                    "Version ${entry.version_name}" + (entry.category?.let { " • $it" } ?: ""),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

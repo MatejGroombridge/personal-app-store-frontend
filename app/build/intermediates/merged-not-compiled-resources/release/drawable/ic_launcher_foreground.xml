@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple "M / Store" mark. Replace with your own art when ready. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#A6E22E"
+        android:pathData="M34,40 L34,72 L40,72 L40,52 L48,68 L54,68 L62,52 L62,72 L68,72 L68,40 L60,40 L51,58 L42,40 Z" />
+    <path
+        android:fillColor="#66D9EF"
+        android:pathData="M30,76 L72,76 L72,80 L30,80 Z" />
+</vector>

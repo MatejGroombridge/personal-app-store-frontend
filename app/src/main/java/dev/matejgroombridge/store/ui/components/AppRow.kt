@@ -118,9 +118,9 @@ private fun AppIcon(entry: AppEntry) {
 @Composable
 private fun StatusLine(entry: AppEntry, state: InstallState) {
     val text = when (state) {
-        is InstallState.NotInstalled    -> "v${entry.version_name}"
-        is InstallState.Installed       -> "v${entry.version_name} • Installed"
-        is InstallState.UpdateAvailable -> "v${state.installedVersionName} → v${entry.version_name}"
+        is InstallState.NotInstalled    -> "Version ${entry.version_name}"
+        is InstallState.Installed       -> "Version ${entry.version_name} • Installed"
+        is InstallState.UpdateAvailable -> "Version ${state.installedVersionName} → ${entry.version_name}"
     }
     val color = when (state) {
         is InstallState.UpdateAvailable -> MaterialTheme.colorScheme.tertiary
