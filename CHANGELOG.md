@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.1.0 — 2026-05-03
+
+Removed pull down to refresh
+
+
 ## v1.0.0 — 2026-05-03
 
 First major release. Complete UI and functionality
