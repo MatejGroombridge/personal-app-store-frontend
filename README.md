@@ -67,4 +67,18 @@ app/src/main/java/dev/matejgroombridge/store/
     └── StoreViewModel.kt
 ```
 
-See `docs/` for keystore setup, GitHub Actions, and the manifest format.
+## Cutting a release
+
+```bash
+./bin/changeset
+```
+
+Interactive prompt: pick patch / minor / major, type a description, and the script bumps `versionName` + `versionCode`, updates `CHANGELOG.md`, commits, tags, and pushes. The push triggers the GitHub Actions release workflow which builds, signs, uploads the APK, and patches the central manifest. Full guide in [`docs/RELEASING.md`](docs/RELEASING.md).
+
+## More docs
+
+- [`docs/RELEASING.md`](docs/RELEASING.md) — how to cut a release with `bin/changeset`
+- [`docs/KEYSTORE_SETUP.md`](docs/KEYSTORE_SETUP.md) — generating and securing the signing key
+- [`docs/GITHUB_ACTIONS.md`](docs/GITHUB_ACTIONS.md) — the release pipeline that every app repo uses
+- [`docs/MANIFEST_SPEC.md`](docs/MANIFEST_SPEC.md) — the JSON schema the Store App polls
+- [`docs/RUNNING_LOCALLY.md`](docs/RUNNING_LOCALLY.md) — first-time Android Studio setup

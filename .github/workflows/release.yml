@@ -84,7 +84,11 @@ jobs:
       - name: Checkout manifest repo
         uses: actions/checkout@v4
         with:
-          repository: matejgroombridge/personal-app-manifest
+          # The manifest is served from this repo's GitHub Pages site:
+          #   https://matejgroombridge.github.io/personal-app-store/manifest.json
+          # File lives at the repo root on the main branch.
+          repository: matejgroombridge/personal-app-store
+          ref: main
           token: ${{ secrets.MANIFEST_REPO_TOKEN }}
           path: manifest-repo
 
@@ -107,7 +111,7 @@ jobs:
           TAG:          ${{ github.ref_name }}
         run: |
           python3 - <<'PY'
-          import json, os, datetime, urllib.parse, pathlib
+          import json, os, datetime, urllib.parse, pathlib, re
           path = pathlib.Path("manifest-repo/manifest.json")
           data = json.loads(path.read_text()) if path.exists() else {"apps": []}
           apps = [a for a in data.get("apps", []) if a.get("package_name") != os.environ["PKG"]]
@@ -115,6 +119,18 @@ jobs:
               f"https://github.com/{os.environ['REPO']}/releases/download/"
               f"{urllib.parse.quote(os.environ['TAG'])}/{os.environ['APK_NAME']}"
           )
+
+          # Pull the most recent CHANGELOG.md entry (the chunk between the first
+          # `## ` heading and the next one) so the in-app detail screen shows
+          # real release notes. Falls back to "" if the file or section is missing.
+          changelog = ""
+          cl_path = pathlib.Path("CHANGELOG.md")
+          if cl_path.exists():
+              text = cl_path.read_text()
+              m = re.search(r"^## .+?(?=^## |\Z)", text, flags=re.MULTILINE | re.DOTALL)
+              if m:
+                  changelog = m.group(0).strip()
+
           apps.append({
               "package_name":   os.environ["PKG"],
               "display_name":   os.environ["DISPLAY_NAME"],
@@ -128,6 +144,7 @@ jobs:
               "released_at":    datetime.datetime.utcnow().isoformat() + "Z",
               "source_url":     f"https://github.com/{os.environ['REPO']}",
               "category":       os.environ["CATEGORY"],
+              "changelog":      changelog,
           })
           data["apps"] = sorted(apps, key=lambda a: a["display_name"].lower())
           data["generated_at"] = datetime.datetime.utcnow().isoformat() + "Z"

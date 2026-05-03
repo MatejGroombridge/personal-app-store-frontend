@@ -19,10 +19,11 @@ android {
         // The Store App is itself one of the apps in the manifest, so it can self-update.
         // The URL below is the manifest endpoint the app polls; can also be overridden
         // at runtime via Settings → Manifest URL.
+        // Served via GitHub Pages out of matejgroombridge/personal-app-store.
         buildConfigField(
             "String",
             "MANIFEST_URL",
-            "\"https://raw.githubusercontent.com/matejgroombridge/personal-app-manifest/main/manifest.json\""
+            "\"https://matejgroombridge.github.io/personal-app-store/manifest.json\""
         )
     }
 
