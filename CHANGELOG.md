@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v0.3.1 — 2026-05-03
+
+Updated "v" to "Version" across UI
+
+
 ## v0.3.0 — 2026-05-03
 
 Added changeset + fixed manifest
