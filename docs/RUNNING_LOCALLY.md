@@ -17,13 +17,13 @@ A minimal walkthrough — first build, first run, what to do when things break.
 
 ## Run
 
-Hit Run ▶. The first build takes ~1–2 min. You should land on a screen titled **My Apps** with two mock entries.
+Hit Run ▶. The first build takes ~1–2 min. You should land on a screen titled **My Apps**, populated from whatever live manifest is configured in `app/build.gradle.kts` (`MANIFEST_URL`). If you haven't shipped any apps yet, the list will be empty — that's expected.
 
 ## Try the flow
 
 - **Tap a row** → detail screen
-- **Tap "Install"** → the system will prompt you to grant "install unknown apps" permission for Matej Store. Grant it. (After granting, tap Install again.) The download will fail because the URL is fake, and you'll see "Failed". This proves the whole pipeline up to download is working.
-- **Open Settings** (gear icon, top right) → flip themes, toggle "wallpaper colors". On Android 12+ the accent color updates from your wallpaper instantly.
+- **Tap "Install"** → the system will prompt you to grant "install unknown apps" permission for Matej Store. Grant it. (After granting, tap Install again.) The APK will download, get SHA-256 verified, and be handed to the system installer.
+- **Open Settings** (gear icon, top right) → flip themes, toggle "wallpaper colors", or point **Manifest URL** at a different host. On Android 12+ the accent color updates from your wallpaper instantly.
 
 ## Common errors
 
@@ -36,19 +36,12 @@ Hit Run ▶. The first build takes ~1–2 min. You should land on a screen title
 | Compose previews blank | Need to build once first | Build → Make Project (Ctrl/⌘ + F9) |
 | Crash on launch with `MissingResourceException` | Stale build cache | Build → Clean Project, then Build → Rebuild |
 
-## Going from mock to live
+## Pointing at a different manifest
 
-Once you've published a real manifest:
+The default `MANIFEST_URL` is baked in via `app/build.gradle.kts`. To target a different host:
 
-1. Open `app/build.gradle.kts`
-2. Change:
-   ```kotlin
-   buildConfigField("boolean", "USE_MOCK_MANIFEST", "true")
-   ```
-   to `"false"`, and update `MANIFEST_URL` to your actual JSON URL.
-3. Sync Gradle (banner at top), Run again.
-
-Or, leave the build defaults and override the URL at runtime via **Settings → Manifest URL** — handy for testing against staging endpoints.
+1. Edit the `MANIFEST_URL` `buildConfigField`, sync Gradle, run again, **or**
+2. Override at runtime via **Settings → Manifest URL** — handy for testing against staging endpoints without a rebuild.
 
 ## Building a signed APK locally
 

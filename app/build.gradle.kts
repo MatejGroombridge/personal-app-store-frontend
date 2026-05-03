@@ -17,14 +17,13 @@ android {
         versionName = "0.1.0"
 
         // The Store App is itself one of the apps in the manifest, so it can self-update.
-        // The URL below is the manifest endpoint the app polls. Replace with your own
-        // GitHub Releases / R2 / domain URL once available.
+        // The URL below is the manifest endpoint the app polls; can also be overridden
+        // at runtime via Settings → Manifest URL.
         buildConfigField(
             "String",
             "MANIFEST_URL",
             "\"https://raw.githubusercontent.com/matejgroombridge/personal-app-manifest/main/manifest.json\""
         )
-        buildConfigField("boolean", "USE_MOCK_MANIFEST", "true")
     }
 
     buildTypes {

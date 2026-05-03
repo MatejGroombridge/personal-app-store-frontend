@@ -22,7 +22,7 @@ Your phone's home for every app you build. Polls a JSON manifest, lists your app
 3. Plug in your phone (with USB debugging on) **or** start an emulator (Tools → Device Manager → Create).
 4. Hit **Run ▶**.
 
-You should see a screen titled **My Apps** with two mock entries (Notes, Focus Timer). The buttons won't actually install anything yet because the URLs are fake — that's expected. The next step is wiring up real publishing.
+You should see a screen titled **My Apps**, populated from the live manifest URL configured in `app/build.gradle.kts` (or whatever you've overridden it to in **Settings → Manifest URL**). If the manifest is empty, you'll see an empty state — that's expected before your first release lands.
 
 ## What's implemented
 
@@ -33,7 +33,6 @@ You should see a screen titled **My Apps** with two mock entries (Notes, Focus T
 - ✅ System installer hand-off via FileProvider intent
 - ✅ Compose Navigation, edge-to-edge, splash screen
 - ✅ Per-package install state computed from `PackageManager`
-- ✅ Mock manifest baked in so the UI works before any real apps exist
 
 ## What's *not* yet built (intentional next steps)
 
@@ -42,18 +41,12 @@ You should see a screen titled **My Apps** with two mock entries (Notes, Focus T
 - ⛔ Background update checks (WorkManager) — the dependency is wired, the worker isn't yet
 - ⛔ Actual app icons (placeholder vector for now)
 
-## Going live (replace mock data with the real thing)
+## Pointing at a different manifest
 
-Once you've generated your keystore and pushed your first signed APK to a public manifest:
+The default `MANIFEST_URL` lives in `app/build.gradle.kts`. To target a different host (e.g. a staging endpoint or a fork), either:
 
-1. Open `app/build.gradle.kts`
-2. Change:
-   ```kotlin
-   buildConfigField("boolean", "USE_MOCK_MANIFEST", "true")
-   buildConfigField("String", "MANIFEST_URL", "\"https://…\"")
-   ```
-   to point at your real manifest URL and set the flag to `false`.
-3. Or use the in-app **Settings → Manifest URL** field to override at runtime.
+1. Edit the `MANIFEST_URL` `buildConfigField` and rebuild, or
+2. Override at runtime via **Settings → Manifest URL** (handy for testing without a rebuild).
 
 ## Project layout
 
@@ -64,7 +57,7 @@ app/src/main/java/dev/matejgroombridge/store/
 ├── data/
 │   ├── model/                   ← Serializable manifest + state types
 │   ├── network/                 ← Shared Ktor client
-│   ├── repository/              ← Manifest (real + mock) + installed apps
+│   ├── repository/              ← Manifest fetcher + installed apps
 │   └── settings/                ← DataStore-backed prefs
 ├── install/                     ← Download, verify, install flow
 └── ui/

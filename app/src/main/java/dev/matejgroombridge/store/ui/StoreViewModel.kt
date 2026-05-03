@@ -13,7 +13,6 @@ import dev.matejgroombridge.store.data.model.AppManifest
 import dev.matejgroombridge.store.data.model.InstallState
 import dev.matejgroombridge.store.data.repository.InstalledAppsRepository
 import dev.matejgroombridge.store.data.repository.ManifestRepository
-import dev.matejgroombridge.store.data.repository.MockManifestRepository
 import dev.matejgroombridge.store.data.repository.RemoteManifestRepository
 import dev.matejgroombridge.store.data.settings.SettingsRepository
 import dev.matejgroombridge.store.install.InstallCoordinator
@@ -31,7 +30,7 @@ import kotlinx.coroutines.launch
  * Single ViewModel that owns the UI state. Small enough not to warrant splitting per-screen.
  *
  * Composes three sources:
- *  - manifest (network or mock)
+ *  - manifest (network)
  *  - installed apps (PackageManager)
  *  - in-flight action state per package (download/verify/install)
  */
@@ -107,10 +106,9 @@ class StoreViewModel(
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 val app = extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as Application
-                val repo = if (BuildConfig.USE_MOCK_MANIFEST) MockManifestRepository() else RemoteManifestRepository()
                 return StoreViewModel(
                     app = app,
-                    manifestRepo = repo,
+                    manifestRepo = RemoteManifestRepository(),
                     installedRepo = InstalledAppsRepository(app),
                     settings = SettingsRepository(app),
                     installs = InstallCoordinator(app),

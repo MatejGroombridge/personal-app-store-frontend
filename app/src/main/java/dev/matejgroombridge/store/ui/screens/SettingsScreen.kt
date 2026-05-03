@@ -146,12 +146,6 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
                 Text("Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
-                if (BuildConfig.USE_MOCK_MANIFEST) {
-                    Spacer(Modifier.height(6.dp))
-                    Text("Running with mock data — flip USE_MOCK_MANIFEST to false in build.gradle to go live.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.tertiary)
-                }
             }
             Spacer(Modifier.height(24.dp))
         }
