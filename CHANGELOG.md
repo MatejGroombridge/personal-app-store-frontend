@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v0.3.2 — 2026-05-03
+
+Fix signing key mismatch"
+
+
 ## v0.3.1 — 2026-05-03
 
 Updated "v" to "Version" across UI
