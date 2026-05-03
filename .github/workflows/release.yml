@@ -99,9 +99,9 @@ jobs:
           PKG:          ${{ steps.meta.outputs.package }}
           # Override the auto-derived display name (which would just be the repo
           # slug). The Store App is special — it shows up to the user as
-          # "Matej Store", not "Store App".
-          DISPLAY_NAME: "Matej Store"
-          DESCRIPTION:  "Personal Android app store. Polls a JSON manifest, downloads + verifies signed APKs, and hands them to the system installer."
+          # "Groom Hub", not "Store App".
+          DISPLAY_NAME: "Groom Hub"
+          DESCRIPTION:  "My personal Android app store. Polls a JSON manifest, downloads & verifies signed APKs and hands them to the system installer."
           CATEGORY:     "System"
           VC:           ${{ steps.meta.outputs.version_code }}
           VN:           ${{ steps.meta.outputs.version_name }}

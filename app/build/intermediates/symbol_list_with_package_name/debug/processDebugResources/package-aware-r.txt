@@ -56,6 +56,7 @@ color call_notification_decline_color
 color ic_launcher_background
 color notification_action_color_filter
 color notification_icon_bg_color
+color splash_background
 color vector_tint_color
 color vector_tint_theme_color
 dimen compat_button_inset_horizontal_material
@@ -218,10 +219,13 @@ layout splash_screen_view
 mipmap ic_launcher
 mipmap ic_launcher_round
 string action_back
+string action_hidden_apps
+string action_hide
 string action_install
 string action_open
 string action_refresh
 string action_settings
+string action_unhide
 string action_uninstall
 string action_update
 string androidx_startup
@@ -312,12 +316,10 @@ string range_start
 string selected
 string settings_about
 string settings_check_frequency
-string settings_dynamic_color
 string settings_manifest_url
 string settings_theme
 string settings_theme_dark
 string settings_theme_light
-string settings_theme_monokai
 string settings_theme_system
 string settings_title
 string settings_version
@@ -354,7 +356,8 @@ style TextAppearance_Compat_Notification_Info
 style TextAppearance_Compat_Notification_Line2
 style TextAppearance_Compat_Notification_Time
 style TextAppearance_Compat_Notification_Title
-style Theme_MatejStore
+style Theme_GroomHub
+style Theme_GroomHub_Main
 style Theme_SplashScreen
 style Theme_SplashScreen_Common
 style Theme_SplashScreen_IconBackground

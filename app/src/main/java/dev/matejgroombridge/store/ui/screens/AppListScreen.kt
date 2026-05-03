@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -43,10 +44,16 @@ fun AppListScreen(
     onAppClick: (String) -> Unit,
     onPrimaryAction: (String) -> Unit,
     onOpenSettings: () -> Unit,
+    onOpenHidden: () -> Unit,
 ) {
     val state by vm.ui.collectAsState()
     val actions by vm.actions.collectAsState()
+    val settings by vm.settingsFlow.collectAsState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+
+    val visibleApps = state.manifest?.apps
+        ?.filter { it.package_name !in settings.hiddenPackages }
+        ?: emptyList()
 
     Scaffold(
         modifier = Modifier
@@ -59,6 +66,9 @@ fun AppListScreen(
                 actions = {
                     IconButton(onClick = vm::refresh) {
                         Icon(Icons.Outlined.Refresh, contentDescription = "Refresh")
+                    }
+                    IconButton(onClick = onOpenHidden) {
+                        Icon(Icons.Outlined.VisibilityOff, contentDescription = "Hidden apps")
                     }
                     IconButton(onClick = onOpenSettings) {
                         Icon(Icons.Outlined.Settings, contentDescription = "Settings")
@@ -84,6 +94,11 @@ fun AppListScreen(
                 detail = "Push a tag to one of your repos to publish your first app.",
                 padding = padding,
             )
+            visibleApps.isEmpty() -> CenteredMessage(
+                title = "Nothing to show",
+                detail = "All apps in the manifest are hidden. Tap the eye icon above to manage them.",
+                padding = padding,
+            )
             else -> LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(
@@ -93,7 +108,7 @@ fun AppListScreen(
                 ),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(state.manifest!!.apps, key = { it.package_name }) { entry ->
+                items(visibleApps, key = { it.package_name }) { entry ->
                     AppRow(
                         entry = entry,
                         installState = state.installStates[entry.package_name] ?: InstallState.NotInstalled,

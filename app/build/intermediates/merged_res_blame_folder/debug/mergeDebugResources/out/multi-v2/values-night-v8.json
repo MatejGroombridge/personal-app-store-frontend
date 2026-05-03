@@ -21,22 +21,22 @@
                     }
                 },
                 {
-                    "source": "/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/res/values-night/themes.xml",
+                    "source": "/Users/mgroombridge/Documents/store-app/app/src/main/res/values-night/themes.xml",
                     "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "63",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "467"
+                        "startLines": "1,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "63,376",
+                        "endLines": "5,12",
+                        "endColumns": "12,12",
+                        "endOffsets": "370,783"
                     },
                     "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "186",
-                        "endLines": "8",
-                        "endColumns": "12",
-                        "endOffsets": "588"
+                        "startLines": "3,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "186,429",
+                        "endLines": "7,13",
+                        "endColumns": "12,12",
+                        "endOffsets": "424,834"
                     }
                 }
             ]

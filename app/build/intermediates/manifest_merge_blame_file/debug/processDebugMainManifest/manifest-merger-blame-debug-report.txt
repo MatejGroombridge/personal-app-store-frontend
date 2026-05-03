@@ -1,8 +1,8 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="dev.matejgroombridge.store.debug"
-4    android:versionCode="1"
-5    android:versionName="0.1.0-debug" >
+4    android:versionCode="6"
+5    android:versionName="0.3.3-debug" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="26"
@@ -10,29 +10,29 @@
 10
 11    <!-- Network: fetch manifest + download APKs -->
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:6:5-67
-12-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:6:22-64
+12-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:6:22-64
 13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:7:5-79
-13-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:7:22-76
+13-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:7:5-79
+13-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:7:22-76
 14
 15    <!-- Install/update other apps -->
 16    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-16-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:10:5-83
-16-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:10:22-80
+16-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:10:5-83
+16-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:10:22-80
 17
 18    <!-- See which of our apps are already installed (Android 11+ visibility rules) -->
 19    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-19-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:13:5-15:53
-19-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:14:9-61
+19-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:13:5-15:53
+19-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:14:9-61
 20
 21    <!-- Background update checks -->
 22    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-22-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:18:5-77
-22-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:18:22-74
+22-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:18:5-77
+22-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:18:22-74
 23    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-23-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:19:5-81
-23-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:19:22-78
+23-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:19:5-81
+23-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:19:22-78
 24    <uses-permission android:name="android.permission.WAKE_LOCK" />
 24-->[androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:23:5-68
 24-->[androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:23:22-65
@@ -52,68 +52,68 @@
 31-->[androidx.core:core:1.15.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/c3bde5d38f373d893279af56c18d658f/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
 32
 33    <application
-33-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
+33-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
 34        android:name="dev.matejgroombridge.store.StoreApplication"
-34-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:22:9-41
+34-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:22:9-41
 35        android:allowBackup="true"
-35-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:23:9-35
+35-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:23:9-35
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 36-->[androidx.core:core:1.15.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/c3bde5d38f373d893279af56c18d658f/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 37        android:dataExtractionRules="@xml/data_extraction_rules"
-37-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:24:9-65
+37-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:24:9-65
 38        android:debuggable="true"
 39        android:enableOnBackInvokedCallback="true"
-39-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:31:9-51
+39-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:31:9-51
 40        android:extractNativeLibs="false"
 41        android:fullBackupContent="@xml/backup_rules"
-41-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:25:9-54
+41-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:25:9-54
 42        android:icon="@mipmap/ic_launcher"
-42-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:26:9-43
+42-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:26:9-43
 43        android:label="@string/app_name"
-43-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:27:9-41
+43-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:27:9-41
 44        android:roundIcon="@mipmap/ic_launcher_round"
-44-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:28:9-54
+44-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:28:9-54
 45        android:supportsRtl="true"
-45-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:29:9-35
+45-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:29:9-35
 46        android:testOnly="true"
-47        android:theme="@style/Theme.MatejStore" >
-47-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:30:9-48
+47        android:theme="@style/Theme.GroomHub" >
+47-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:30:9-46
 48        <activity
-48-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:34:9-42:20
+48-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:34:9-42:20
 49            android:name="dev.matejgroombridge.store.MainActivity"
-49-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:35:13-41
+49-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:35:13-41
 50            android:exported="true"
-50-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:36:13-36
-51            android:theme="@style/Theme.MatejStore" >
-51-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:37:13-52
+50-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:36:13-36
+51            android:theme="@style/Theme.GroomHub.Main" >
+51-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:37:13-55
 52            <intent-filter>
-52-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:38:13-41:29
+52-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:38:13-41:29
 53                <action android:name="android.intent.action.MAIN" />
-53-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:39:17-69
-53-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:39:25-66
+53-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:39:17-69
+53-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:39:25-66
 54
 55                <category android:name="android.intent.category.LAUNCHER" />
-55-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:40:17-77
-55-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:40:27-74
+55-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:40:17-77
+55-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:40:27-74
 56            </intent-filter>
 57        </activity>
 58
 59        <!-- FileProvider so we can hand APK files to the system installer -->
 60        <provider
 61            android:name="androidx.core.content.FileProvider"
-61-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:46:13-62
+61-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:46:13-62
 62            android:authorities="dev.matejgroombridge.store.debug.fileprovider"
-62-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:47:13-64
+62-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:47:13-64
 63            android:exported="false"
-63-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:48:13-37
+63-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:48:13-37
 64            android:grantUriPermissions="true" >
-64-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:49:13-47
+64-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:49:13-47
 65            <meta-data
-65-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:50:13-52:54
+65-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:50:13-52:54
 66                android:name="android.support.FILE_PROVIDER_PATHS"
-66-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:51:17-67
+66-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:51:17-67
 67                android:resource="@xml/file_paths" />
-67-->/Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:52:17-51
+67-->/Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:52:17-51
 68        </provider>
 69        <provider
 69-->[androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:29:9-37:20

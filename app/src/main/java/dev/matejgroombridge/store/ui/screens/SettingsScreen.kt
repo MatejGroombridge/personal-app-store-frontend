@@ -1,6 +1,5 @@
 package dev.matejgroombridge.store.ui.screens
 
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -32,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -70,7 +67,7 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
                 .padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            // ─── Theme ──────────────────────────────────────────
+            // ─── Appearance ────────────────────────────────────
             Section("Appearance") {
                 Text("Theme", style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface)
@@ -78,9 +75,8 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf(
                         ThemeMode.System to "System",
-                        ThemeMode.Light to "Light",
-                        ThemeMode.Dark to "Dark",
-                        ThemeMode.Monokai to "Monokai",
+                        ThemeMode.Light  to "Light",
+                        ThemeMode.Dark   to "Dark",
                     ).forEach { (mode, label) ->
                         FilterChip(
                             selected = settings.themeMode == mode,
@@ -88,29 +84,6 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
                             label = { Text(label) },
                         )
                     }
-                }
-
-                Spacer(Modifier.height(20.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text("Wallpaper colors",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurface)
-                        Text(
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-                                "Material You — derive accents from your wallpaper"
-                            else
-                                "Requires Android 12 or newer",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                    Switch(
-                        checked = settings.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
-                        enabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-                            && settings.themeMode != ThemeMode.Monokai,
-                        onCheckedChange = vm::setDynamicColor,
-                    )
                 }
             }
 
@@ -140,7 +113,7 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
 
             // ─── About ──────────────────────────────────────────
             Section("About") {
-                Text("Matej Store", style = MaterialTheme.typography.titleMedium,
+                Text("Groom Hub", style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.SemiBold)
                 Text("Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",

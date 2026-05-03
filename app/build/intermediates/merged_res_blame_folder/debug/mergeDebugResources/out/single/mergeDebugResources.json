@@ -1,26 +1,30 @@
 [
     {
-        "merged": "dev.matejgroombridge.store.app-debug-69:/xml_data_extraction_rules.xml.flat",
-        "source": "dev.matejgroombridge.store.app-main-71:/xml/data_extraction_rules.xml"
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/xml_file_paths.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/xml/file_paths.xml"
+    },
+    {
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/drawable/ic_launcher_foreground.xml"
     },
     {
         "merged": "dev.matejgroombridge.store.app-debug-69:/drawable_ic_launcher_foreground.xml.flat",
         "source": "dev.matejgroombridge.store.app-main-71:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "dev.matejgroombridge.store.app-debug-69:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "dev.matejgroombridge.store.app-main-71:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "dev.matejgroombridge.store.app-debug-69:/xml_backup_rules.xml.flat",
-        "source": "dev.matejgroombridge.store.app-main-71:/xml/backup_rules.xml"
-    },
-    {
-        "merged": "dev.matejgroombridge.store.app-debug-69:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "dev.matejgroombridge.store.app-main-71:/mipmap-anydpi-v26/ic_launcher_round.xml"
-    },
-    {
-        "merged": "dev.matejgroombridge.store.app-debug-69:/xml_file_paths.xml.flat",
-        "source": "dev.matejgroombridge.store.app-main-71:/xml/file_paths.xml"
+        "merged": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-debug-69:/xml_backup_rules.xml.flat",
+        "source": "/Users/mgroombridge/.gradle/daemon/9.0.0/dev.matejgroombridge.store.app-main-71:/xml/backup_rules.xml"
     }
 ]

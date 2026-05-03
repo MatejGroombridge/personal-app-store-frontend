@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MatejStore"
+rootProject.name = "GroomHub"
 include(":app")

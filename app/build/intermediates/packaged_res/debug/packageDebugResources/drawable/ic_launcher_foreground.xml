@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Simple "M / Store" mark. Replace with your own art when ready. -->
+<!--
+    Groom Hub launcher icon foreground.
+
+    A clean 3×3 grid of dots — the classic "apps / launcher" mark, drawn in
+    white at the centre of the adaptive-icon viewport.
+
+    Geometry: nine 8-unit-diameter circles laid out on a 3×3 grid with 16-unit
+    centres, sitting within the centre 48×48 region of the 108×108 launcher
+    viewport. That leaves ~30 units of padding on each side, well inside the
+    adaptive-icon safe zone, so OEM icon-shape masks (circle, squircle,
+    teardrop, etc.) won't clip into it.
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#A6E22E"
-        android:pathData="M34,40 L34,72 L40,72 L40,52 L48,68 L54,68 L62,52 L62,72 L68,72 L68,40 L60,40 L51,58 L42,40 Z" />
-    <path
-        android:fillColor="#66D9EF"
-        android:pathData="M30,76 L72,76 L72,80 L30,80 Z" />
+
+    <!-- Row 1 -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 38,38 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 54,38 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 70,38 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+
+    <!-- Row 2 -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 38,54 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 54,54 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 70,54 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+
+    <!-- Row 3 -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 38,70 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 54,70 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M 70,70 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
 </vector>

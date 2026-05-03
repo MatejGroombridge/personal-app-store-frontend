@@ -23,8 +23,9 @@ import dev.matejgroombridge.store.data.model.InstallState
 import dev.matejgroombridge.store.ui.StoreViewModel
 import dev.matejgroombridge.store.ui.screens.AppDetailScreen
 import dev.matejgroombridge.store.ui.screens.AppListScreen
+import dev.matejgroombridge.store.ui.screens.HiddenAppsScreen
 import dev.matejgroombridge.store.ui.screens.SettingsScreen
-import dev.matejgroombridge.store.ui.theme.MatejStoreTheme
+import dev.matejgroombridge.store.ui.theme.GroomHubTheme
 import kotlinx.coroutines.launch
 
 /**
@@ -40,10 +41,17 @@ class MainActivity : ComponentActivity() {
 
     private val vm: StoreViewModel by viewModels { StoreViewModel.Factory }
 
+    /** Package the user most recently kicked off an install for, so we can clear
+     *  its transient ActionState (the spinner) when the system installer returns. */
+    private var pendingInstallPackage: String? = null
+
     private val installLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { _ ->
-        // System installer returned (success/cancel/fail). Re-check what's installed.
+        // System installer returned (success/cancel/fail). Clear the pending action
+        // state so the spinner stops, then re-check what's installed.
+        pendingInstallPackage?.let(vm.installs::reset)
+        pendingInstallPackage = null
         vm.refreshInstalledStates()
     }
 
@@ -57,10 +65,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val settings by vm.settingsFlow.collectAsState()
-            MatejStoreTheme(
-                themeMode = settings.themeMode,
-                useDynamicColor = settings.dynamicColor,
-            ) {
+            GroomHubTheme(themeMode = settings.themeMode) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -101,6 +106,7 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             vm.installs.downloadAndInstall(entry)?.let { intent ->
+                pendingInstallPackage = packageName
                 installLauncher.launch(intent)
             }
         }
@@ -120,6 +126,7 @@ private fun AppNavigation(
                 onAppClick = { pkg -> nav.navigate("detail/$pkg") },
                 onPrimaryAction = onPrimaryAction,
                 onOpenSettings = { nav.navigate("settings") },
+                onOpenHidden = { nav.navigate("hidden") },
             )
         }
         composable("detail/{pkg}") { backStack ->
@@ -133,6 +140,9 @@ private fun AppNavigation(
         }
         composable("settings") {
             SettingsScreen(vm = vm, onBack = { nav.popBackStack() })
+        }
+        composable("hidden") {
+            HiddenAppsScreen(vm = vm, onBack = { nav.popBackStack() })
         }
     }
 }

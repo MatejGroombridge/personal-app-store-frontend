@@ -61,9 +61,9 @@ class StoreViewModel(
         viewModelScope, SharingStarted.Eagerly,
         SettingsRepository.Settings(
             themeMode = ThemeMode.System,
-            dynamicColor = true,
             manifestUrl = BuildConfig.MANIFEST_URL,
             checkIntervalHours = 6,
+            hiddenPackages = emptySet(),
         ),
     )
 
@@ -95,11 +95,13 @@ class StoreViewModel(
         _ui.value.manifest?.apps?.firstOrNull { it.package_name == packageName }
 
     fun setThemeMode(mode: ThemeMode) = viewModelScope.launch { settings.setThemeMode(mode) }
-    fun setDynamicColor(enabled: Boolean) = viewModelScope.launch { settings.setDynamicColor(enabled) }
     fun setManifestUrl(url: String) = viewModelScope.launch {
         settings.setManifestUrl(url); refresh()
     }
     fun setCheckIntervalHours(hours: Int) = viewModelScope.launch { settings.setCheckIntervalHours(hours) }
+    fun setHidden(packageName: String, hidden: Boolean) = viewModelScope.launch {
+        settings.setHidden(packageName, hidden)
+    }
 
     companion object {
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {

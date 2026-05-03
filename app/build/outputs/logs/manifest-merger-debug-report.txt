@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:45:9-53:20
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:45:9-53:20
 	android:grantUriPermissions
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:49:13-47
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:49:13-47
 	android:authorities
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:47:13-64
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:47:13-64
 	android:exported
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:48:13-37
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:48:13-37
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:46:13-62
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:46:13-62
 manifest
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:2:1-57:12
 MERGED from [androidx.work:work-runtime-ktx:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/7a1959ff6d5afdabd0602b8c45219b4e/transformed/work-runtime-ktx-2.10.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:17:1-145:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/99a085e634e51d47def19d3b87bd628e/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
@@ -91,48 +91,48 @@ MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/mgroombridge/.gradle
 MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/b7edf999ab21b12dabf83cbce4326e82/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/48e96b960a47bcf4fc2673b393c5ac1b/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
 	package
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 	xmlns:tools
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:3:5-51
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:6:5-67
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:6:5-67
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:6:22-64
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:6:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:7:5-79
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:7:5-79
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:24:5-79
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:24:5-79
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:7:22-76
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:7:22-76
 uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:10:5-83
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:10:5-83
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:10:22-80
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:10:22-80
 uses-permission#android.permission.QUERY_ALL_PACKAGES
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:13:5-15:53
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:13:5-15:53
 	tools:ignore
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:15:9-50
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:15:9-50
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:14:9-61
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:14:9-61
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:18:5-77
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:18:5-77
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:18:22-74
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:18:22-74
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:19:5-81
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:19:5-81
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:25:5-81
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:25:5-81
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:19:22-78
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:19:22-78
 application
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:21:5-55:19
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:28:5-143:19
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:28:5-143:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/0351d166e74a3a06ceb518ed92bc4f54/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
@@ -152,59 +152,59 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mgro
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/1f89aa4588300a57700f6a5181f6329b/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/1f89aa4588300a57700f6a5181f6329b/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
 	android:extractNativeLibs
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/c3bde5d38f373d893279af56c18d658f/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:29:9-35
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:29:9-35
 	android:label
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:27:9-41
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:27:9-41
 	android:fullBackupContent
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:25:9-54
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:25:9-54
 	android:roundIcon
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:28:9-54
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:28:9-54
 	tools:targetApi
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:32:9-29
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:32:9-29
 	android:icon
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:26:9-43
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:26:9-43
 	android:allowBackup
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:23:9-35
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:23:9-35
 	android:theme
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:30:9-48
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:30:9-46
 	android:enableOnBackInvokedCallback
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:31:9-51
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:31:9-51
 	android:dataExtractionRules
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:24:9-65
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:24:9-65
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:22:9-41
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:22:9-41
 activity#dev.matejgroombridge.store.MainActivity
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:34:9-42:20
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:34:9-42:20
 	android:exported
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:36:13-36
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:36:13-36
 	android:theme
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:37:13-52
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:37:13-55
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:35:13-41
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:35:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:38:13-41:29
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:38:13-41:29
 action#android.intent.action.MAIN
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:39:17-69
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:39:17-69
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:39:25-66
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:39:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:40:17-77
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:40:17-77
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:40:27-74
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:40:27-74
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:50:13-52:54
+ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:50:13-52:54
 	android:resource
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:52:17-51
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:52:17-51
 	android:name
-		ADDED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml:51:17-67
+		ADDED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml:51:17-67
 uses-sdk
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
-INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 MERGED from [androidx.work:work-runtime-ktx:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/7a1959ff6d5afdabd0602b8c45219b4e/transformed/work-runtime-ktx-2.10.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.work:work-runtime-ktx:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/7a1959ff6d5afdabd0602b8c45219b4e/transformed/work-runtime-ktx-2.10.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:21:5-44
@@ -356,9 +356,9 @@ MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/mgroombridge/.gradle/caches/9.
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/48e96b960a47bcf4fc2673b393c5ac1b/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/48e96b960a47bcf4fc2673b393c5ac1b/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 	android:targetSdkVersion
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/mgroombridge/Documents/personal-app-store/store-app/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mgroombridge/Documents/store-app/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.WAKE_LOCK
 ADDED from [androidx.work:work-runtime:2.10.0] /Users/mgroombridge/.gradle/caches/9.0.0/transforms/f276f6ded6c61b19589b0745e0735350/transformed/work-runtime-2.10.0/AndroidManifest.xml:23:5-68
 	android:name
