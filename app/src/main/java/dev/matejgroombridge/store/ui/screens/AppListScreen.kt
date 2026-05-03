@@ -30,7 +30,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -128,47 +127,36 @@ fun AppListScreen(
                 detail = "All apps in the manifest are hidden. Tap the eye icon above to manage them.",
                 padding = padding,
             )
-            else -> PullToRefreshBox(
-                // Show the indicator only while a user-initiated refresh is in
-                // flight. We treat "isLoading with an existing manifest" as
-                // refreshing; the very first load is handled by the spinner branch.
-                isRefreshing = state.isLoading && state.manifest != null,
-                onRefresh = vm::refresh,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = padding.calculateTopPadding()),
+            else -> LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(
+                    start = 20.dp, end = 20.dp,
+                    top = padding.calculateTopPadding() + 8.dp,
+                    bottom = padding.calculateBottomPadding() + 24.dp,
+                ),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        start = 20.dp, end = 20.dp,
-                        top = 8.dp,
-                        bottom = padding.calculateBottomPadding() + 24.dp,
-                    ),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    // "Install all updates" sticky banner — only when ≥2 are
-                    // available (single-update is fine via the row's button).
-                    if (updateCount >= 2) {
-                        item("install_all") {
-                            InstallAllBanner(
-                                count = updateCount,
-                                onInstallAll = onInstallAllUpdates,
-                            )
-                        }
-                    }
-
-                    items(visibleApps, key = { it.package_name }) { entry ->
-                        AppRow(
-                            entry = entry,
-                            installState = state.installStates[entry.package_name] ?: InstallState.NotInstalled,
-                            actionState = actions[entry.package_name] ?: ActionState.Idle,
-                            onPrimaryAction = { onPrimaryAction(entry.package_name) },
-                            onClick = { onAppClick(entry.package_name) },
+                // "Install all updates" sticky banner — only when ≥2 are
+                // available (single-update is fine via the row's button).
+                if (updateCount >= 2) {
+                    item("install_all") {
+                        InstallAllBanner(
+                            count = updateCount,
+                            onInstallAll = onInstallAllUpdates,
                         )
                     }
-                    item { Spacer(Modifier.height(8.dp)) }
                 }
+
+                items(visibleApps, key = { it.package_name }) { entry ->
+                    AppRow(
+                        entry = entry,
+                        installState = state.installStates[entry.package_name] ?: InstallState.NotInstalled,
+                        actionState = actions[entry.package_name] ?: ActionState.Idle,
+                        onPrimaryAction = { onPrimaryAction(entry.package_name) },
+                        onClick = { onAppClick(entry.package_name) },
+                    )
+                }
+                item { Spacer(Modifier.height(8.dp)) }
             }
         }
     }
