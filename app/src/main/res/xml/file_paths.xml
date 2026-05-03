@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Downloaded APKs go to cache; FileProvider exposes them to the installer -->
+    <cache-path name="apk_downloads" path="apks/" />
+    <external-cache-path name="external_apk_downloads" path="apks/" />
+</paths>
