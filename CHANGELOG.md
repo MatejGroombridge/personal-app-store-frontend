@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.0.0 — 2026-05-03
+
+First major release. Complete UI and functionality
+
+
 ## v0.3.3 — 2026-05-03
 
 Fixed signing config
