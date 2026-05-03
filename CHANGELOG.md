@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v0.3.0 — 2026-05-03
+
+Added changeset + fixed manifest
+
+
 ## v0.2.0 — 2026-05-03
 
 Added changeset + fixed manifest
