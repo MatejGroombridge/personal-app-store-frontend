@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.1.1 — 2026-05-04
+
+Renamed to App Store
+
+
 ## v1.1.0 — 2026-05-03
 
 Removed pull down to refresh
