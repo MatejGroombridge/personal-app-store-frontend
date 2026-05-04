@@ -30,7 +30,7 @@ object HttpClientProvider {
                 socketTimeoutMillis = 30_000
             }
             defaultRequest {
-                header("User-Agent", "GroomHub/1.0 (Android)")
+                header("User-Agent", "AppStore/1.0 (Android)")
                 header("Cache-Control", "no-cache")
             }
             expectSuccess = true

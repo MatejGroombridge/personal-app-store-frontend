@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GroomHub"
+rootProject.name = "AppStore"
 include(":app")

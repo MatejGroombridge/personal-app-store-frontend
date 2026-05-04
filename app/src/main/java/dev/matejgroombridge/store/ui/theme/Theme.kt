@@ -36,7 +36,7 @@ private val FallbackLightScheme: ColorScheme = lightColorScheme()
  * Android 12+, baseline Material 3 on older OS versions.
  */
 @Composable
-fun GroomHubTheme(
+fun AppStoreTheme(
     themeMode: ThemeMode = ThemeMode.System,
     content: @Composable () -> Unit,
 ) {

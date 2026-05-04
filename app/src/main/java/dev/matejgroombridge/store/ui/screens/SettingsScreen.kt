@@ -113,7 +113,7 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
 
             // ─── About ──────────────────────────────────────────
             Section("About") {
-                Text("Groom Hub", style = MaterialTheme.typography.titleMedium,
+                Text("App Store", style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.SemiBold)
                 Text("Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",

@@ -27,7 +27,7 @@ import dev.matejgroombridge.store.ui.screens.AppDetailScreen
 import dev.matejgroombridge.store.ui.screens.AppListScreen
 import dev.matejgroombridge.store.ui.screens.HiddenAppsScreen
 import dev.matejgroombridge.store.ui.screens.SettingsScreen
-import dev.matejgroombridge.store.ui.theme.GroomHubTheme
+import dev.matejgroombridge.store.ui.theme.AppStoreTheme
 import kotlinx.coroutines.launch
 
 /**
@@ -90,7 +90,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val settings by vm.settingsFlow.collectAsState()
-            GroomHubTheme(themeMode = settings.themeMode) {
+            AppStoreTheme(themeMode = settings.themeMode) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
