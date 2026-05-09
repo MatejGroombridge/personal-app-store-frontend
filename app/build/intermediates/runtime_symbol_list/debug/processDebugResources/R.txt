@@ -355,8 +355,8 @@ int style TextAppearance_Compat_Notification_Info 0x7f0b000d
 int style TextAppearance_Compat_Notification_Line2 0x7f0b000e
 int style TextAppearance_Compat_Notification_Time 0x7f0b000f
 int style TextAppearance_Compat_Notification_Title 0x7f0b0010
-int style Theme_GroomHub 0x7f0b0011
-int style Theme_GroomHub_Main 0x7f0b0012
+int style Theme_AppStore 0x7f0b0011
+int style Theme_AppStore_Main 0x7f0b0012
 int style Theme_SplashScreen 0x7f0b0013
 int style Theme_SplashScreen_Common 0x7f0b0014
 int style Theme_SplashScreen_IconBackground 0x7f0b0015

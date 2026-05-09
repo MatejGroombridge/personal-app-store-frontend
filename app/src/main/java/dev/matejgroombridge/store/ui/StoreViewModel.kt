@@ -76,6 +76,8 @@ class StoreViewModel(
             manifestUrl = BuildConfig.MANIFEST_URL,
             checkIntervalHours = 6,
             hiddenPackages = emptySet(),
+            developerOptionsEnabled = false,
+            updateIdeas = emptyMap(),
         ),
     )
 
@@ -113,6 +115,22 @@ class StoreViewModel(
     fun setCheckIntervalHours(hours: Int) = viewModelScope.launch { settings.setCheckIntervalHours(hours) }
     fun setHidden(packageName: String, hidden: Boolean) = viewModelScope.launch {
         settings.setHidden(packageName, hidden)
+    }
+
+    fun setDeveloperOptionsEnabled(enabled: Boolean) = viewModelScope.launch {
+        settings.setDeveloperOptionsEnabled(enabled)
+    }
+
+    fun addUpdateIdea(packageName: String, idea: String) = viewModelScope.launch {
+        settings.addUpdateIdea(packageName, idea)
+    }
+
+    fun removeUpdateIdea(packageName: String, index: Int) = viewModelScope.launch {
+        settings.removeUpdateIdea(packageName, index)
+    }
+
+    fun clearUpdateIdeas(packageName: String) = viewModelScope.launch {
+        settings.clearUpdateIdeas(packageName)
     }
 
     /** Enqueue every app currently in [InstallState.UpdateAvailable]. */

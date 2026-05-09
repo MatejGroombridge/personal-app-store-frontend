@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +16,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.ContentCopy
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,19 +36,31 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
@@ -73,6 +92,8 @@ fun AppDetailScreen(
     val action = actions[packageName] ?: ActionState.Idle
     val isHidden = packageName in settings.hiddenPackages
     val isInstalled = install is InstallState.Installed || install is InstallState.UpdateAvailable
+    val updateIdeas = settings.updateIdeas[packageName].orEmpty()
+    var showUpdateIdeas by remember(packageName) { mutableStateOf(false) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -85,6 +106,14 @@ fun AppDetailScreen(
                     }
                 },
                 actions = {
+                    if (entry != null && settings.developerOptionsEnabled) {
+                        IconButton(onClick = { showUpdateIdeas = true }) {
+                            Icon(
+                                Icons.Outlined.Add,
+                                contentDescription = "Add update idea",
+                            )
+                        }
+                    }
                     if (entry != null) {
                         // Open eye = visible (currently shown), tap to hide.
                         // Closed eye = hidden, tap to unhide.
@@ -113,8 +142,14 @@ fun AppDetailScreen(
             install = install,
             action = action,
             isInstalled = isInstalled,
+            developerOptionsEnabled = settings.developerOptionsEnabled,
+            showUpdateIdeas = showUpdateIdeas,
+            updateIdeas = updateIdeas,
             onPrimaryAction = onPrimaryAction,
             onUninstall = onUninstall,
+            onAddUpdateIdea = { vm.addUpdateIdea(packageName, it) },
+            onClearUpdateIdeas = { vm.clearUpdateIdeas(packageName) },
+            onCloseUpdateIdeas = { showUpdateIdeas = false },
             padding = padding,
         )
     }
@@ -126,8 +161,14 @@ private fun DetailContent(
     install: InstallState,
     action: ActionState,
     isInstalled: Boolean,
+    developerOptionsEnabled: Boolean,
+    showUpdateIdeas: Boolean,
+    updateIdeas: List<String>,
     onPrimaryAction: () -> Unit,
     onUninstall: () -> Unit,
+    onAddUpdateIdea: (String) -> Unit,
+    onClearUpdateIdeas: () -> Unit,
+    onCloseUpdateIdeas: () -> Unit,
     padding: PaddingValues,
 ) {
     Column(
@@ -208,6 +249,16 @@ private fun DetailContent(
             )
         }
 
+        if (developerOptionsEnabled && showUpdateIdeas) {
+            Spacer(Modifier.height(24.dp))
+            UpdateIdeasCard(
+                ideas = updateIdeas,
+                onAddIdea = onAddUpdateIdea,
+                onClearIdeas = onClearUpdateIdeas,
+                onClose = onCloseUpdateIdeas,
+            )
+        }
+
         Spacer(Modifier.height(24.dp))
         if (entry.description.isNotBlank()) {
             Text(
@@ -240,18 +291,142 @@ private fun DetailContent(
 }
 
 @Composable
-private fun SectionCard(title: String, content: @Composable () -> Unit) {
+private fun UpdateIdeasCard(
+    ideas: List<String>,
+    onAddIdea: (String) -> Unit,
+    onClearIdeas: () -> Unit,
+    onClose: () -> Unit,
+) {
+    var newIdea by remember { mutableStateOf("") }
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val clipboardManager = LocalClipboardManager.current
+
+    fun addIdea() {
+        if (newIdea.isBlank()) return
+        onAddIdea(newIdea)
+        newIdea = ""
+    }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+        keyboardController?.show()
+    }
+
+    SectionCard(
+        title = "Future update ideas",
+        actions = {
+            CompactHeaderIconButton(
+                enabled = ideas.isNotEmpty(),
+                onClick = {
+                    clipboardManager.setText(AnnotatedString(ideas.joinToString(separator = "\n")))
+                },
+            ) {
+                Icon(
+                    Icons.Outlined.ContentCopy,
+                    contentDescription = "Copy update ideas",
+                    modifier = Modifier.size(20.dp),
+                )
+            }
+            CompactHeaderIconButton(
+                enabled = ideas.isNotEmpty(),
+                onClick = onClearIdeas,
+            ) {
+                Icon(
+                    Icons.Outlined.Delete,
+                    contentDescription = "Delete all update ideas",
+                    modifier = Modifier.size(20.dp),
+                )
+            }
+            CompactHeaderIconButton(onClick = onClose) {
+                Icon(
+                    Icons.Outlined.Close,
+                    contentDescription = "Close update ideas",
+                    modifier = Modifier.size(20.dp),
+                )
+            }
+        },
+    ) {
+        if (ideas.isNotEmpty()) {
+            Column(verticalArrangement = Arrangement.spacedBy(0.dp)) {
+                ideas.forEach { idea ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            "●",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(end = 6.dp),
+                        )
+                        Text(
+                            idea,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(6.dp))
+        }
+        OutlinedTextField(
+            value = newIdea,
+            onValueChange = { newIdea = it.replace("\n", "") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
+            singleLine = true,
+            label = { Text("Idea") },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences,
+                imeAction = ImeAction.Done,
+            ),
+            keyboardActions = KeyboardActions(onDone = { addIdea() }),
+        )
+    }
+}
+
+@Composable
+private fun CompactHeaderIconButton(
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+    content: @Composable () -> Unit,
+) {
+    IconButton(
+        onClick = onClick,
+        enabled = enabled,
+        modifier = Modifier.size(32.dp),
+    ) {
+        content()
+    }
+}
+
+@Composable
+private fun SectionCard(
+    title: String,
+    actions: @Composable RowScope.() -> Unit = {},
+    content: @Composable () -> Unit,
+) {
     Surface(
         shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surfaceContainer,
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            Text(
-                title,
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    title,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f),
+                )
+                actions()
+            }
             Spacer(Modifier.height(10.dp))
             content()
         }

@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
@@ -21,7 +23,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -32,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import dev.matejgroombridge.store.BuildConfig
 import dev.matejgroombridge.store.ui.StoreViewModel
@@ -42,6 +47,58 @@ import dev.matejgroombridge.store.ui.theme.ThemeMode
 fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
     val settings by vm.settingsFlow.collectAsState()
     var url by remember(settings.manifestUrl) { mutableStateOf(settings.manifestUrl) }
+    var developerPassword by remember { mutableStateOf("") }
+    var developerPasswordError by remember { mutableStateOf<String?>(null) }
+    var showDeveloperPasswordDialog by remember { mutableStateOf(false) }
+
+    if (showDeveloperPasswordDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showDeveloperPasswordDialog = false
+                developerPassword = ""
+                developerPasswordError = null
+            },
+            title = { Text("Enter passcode") },
+            text = {
+                OutlinedTextField(
+                    value = developerPassword,
+                    onValueChange = {
+                        developerPassword = it
+                        developerPasswordError = null
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    label = { Text("Passcode") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = developerPasswordError != null,
+                    supportingText = developerPasswordError?.let { message -> { Text(message) } },
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        if (developerPassword == DEVELOPER_OPTIONS_PASSWORD) {
+                            vm.setDeveloperOptionsEnabled(true)
+                            showDeveloperPasswordDialog = false
+                            developerPassword = ""
+                            developerPasswordError = null
+                        } else {
+                            developerPasswordError = "Incorrect passcode"
+                        }
+                    },
+                ) { Text("Unlock") }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDeveloperPasswordDialog = false
+                        developerPassword = ""
+                        developerPasswordError = null
+                    },
+                ) { Text("Cancel") }
+            },
+        )
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -106,9 +163,37 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Spacer(Modifier.height(8.dp))
-                androidx.compose.material3.TextButton(
+                TextButton(
                     onClick = { vm.setManifestUrl(url.trim()) }
                 ) { Text("Save & refresh") }
+            }
+
+            // ─── Developer ──────────────────────────────────────
+            Section("Developer") {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        "Enable developer options",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Spacer(Modifier.width(16.dp))
+                    Switch(
+                        checked = settings.developerOptionsEnabled,
+                        onCheckedChange = { checked ->
+                            if (checked) {
+                                showDeveloperPasswordDialog = true
+                            } else {
+                                vm.setDeveloperOptionsEnabled(false)
+                                developerPassword = ""
+                                developerPasswordError = null
+                            }
+                        },
+                    )
+                }
             }
 
             // ─── About ──────────────────────────────────────────
@@ -124,6 +209,8 @@ fun SettingsScreen(vm: StoreViewModel, onBack: () -> Unit) {
         }
     }
 }
+
+private const val DEVELOPER_OPTIONS_PASSWORD = "mogdotcom"
 
 @Composable
 private fun Section(title: String, content: @Composable () -> Unit) {

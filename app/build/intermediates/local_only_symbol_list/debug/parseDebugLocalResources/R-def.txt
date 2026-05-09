@@ -40,8 +40,8 @@ string status_not_installed
 string status_update_available
 string status_verifying
 string title_apps
-style Theme.GroomHub
-style Theme.GroomHub.Main
+style Theme.AppStore
+style Theme.AppStore.Main
 xml backup_rules
 xml data_extraction_rules
 xml file_paths
