@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.2.0 — 2026-05-09
+
+Added future update suggestions under Developer options
+
+
 ## v1.1.1 — 2026-05-04
 
 Renamed to App Store
