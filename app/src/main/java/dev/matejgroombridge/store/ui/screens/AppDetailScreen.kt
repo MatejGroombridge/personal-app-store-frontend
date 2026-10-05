@@ -119,7 +119,12 @@ fun AppDetailScreen(
                         }
                     }
                     if (entry != null) {
-                        IconButton(onClick = { vm.setAbandoned(packageName, !isAbandoned) }) {
+                        // Abandoning also uninstalls (system still asks to confirm).
+                        // Un-abandoning leaves the device alone.
+                        IconButton(onClick = {
+                            vm.setAbandoned(packageName, !isAbandoned)
+                            if (!isAbandoned && isInstalled) onUninstall()
+                        }) {
                             Icon(
                                 if (isAbandoned) Icons.Outlined.Unarchive else Icons.Outlined.Archive,
                                 contentDescription = if (isAbandoned) "Unmark as abandoned" else "Mark as abandoned",
