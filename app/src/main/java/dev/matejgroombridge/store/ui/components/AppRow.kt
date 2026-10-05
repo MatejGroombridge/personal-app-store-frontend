@@ -79,6 +79,8 @@ fun AppRow(
                     installState = installState,
                     actionState = actionState,
                     onClick = onPrimaryAction,
+                    // Greyed out in the list; still installable from the detail page.
+                    isAbandoned = isAbandoned,
                 )
             }
 

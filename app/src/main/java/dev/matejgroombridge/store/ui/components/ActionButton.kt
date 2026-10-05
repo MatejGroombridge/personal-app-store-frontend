@@ -27,9 +27,10 @@ fun ActionButton(
     installState: InstallState,
     actionState: ActionState,
     onClick: () -> Unit,
+    isAbandoned: Boolean = false,
 ) {
     AnimatedContent(
-        targetState = ButtonModel.from(installState, actionState),
+        targetState = ButtonModel.from(installState, actionState, isAbandoned),
         transitionSpec = { fadeIn() togetherWith fadeOut() },
         label = "ActionButton",
     ) { model ->
@@ -46,6 +47,7 @@ fun ActionButton(
             }
             is ButtonModel.Primary -> Button(
                 onClick = onClick,
+                enabled = model.enabled,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -60,14 +62,14 @@ fun ActionButton(
 
 private sealed interface ButtonModel {
     data object Spinner : ButtonModel
-    data class Primary(val label: String) : ButtonModel
+    data class Primary(val label: String, val enabled: Boolean = true) : ButtonModel
     data class Tonal(val label: String) : ButtonModel
 
     companion object {
-        fun from(install: InstallState, action: ActionState): ButtonModel = when (action) {
+        fun from(install: InstallState, action: ActionState, abandoned: Boolean): ButtonModel = when (action) {
             is ActionState.Downloading, ActionState.Verifying, ActionState.AwaitingInstall -> Spinner
             is ActionState.Failed, ActionState.Idle -> when (install) {
-                is InstallState.NotInstalled    -> Primary("Install")
+                is InstallState.NotInstalled    -> Primary("Install", enabled = !abandoned)
                 is InstallState.UpdateAvailable -> Primary("Update")
                 is InstallState.Installed       -> Tonal("Open")
             }
