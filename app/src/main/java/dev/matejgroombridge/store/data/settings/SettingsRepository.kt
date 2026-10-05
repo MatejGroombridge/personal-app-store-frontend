@@ -24,6 +24,7 @@ class SettingsRepository(private val context: Context) {
         val ManifestUrl    = stringPreferencesKey("manifest_url")
         val CheckIntervalH = intPreferencesKey("check_interval_hours")
         val HiddenPackages = stringSetPreferencesKey("hidden_packages")
+        val AbandonedPackages = stringSetPreferencesKey("abandoned_packages")
         val DeveloperOptionsEnabled = booleanPreferencesKey("developer_options_enabled")
         val UpdateIdeasJson = stringPreferencesKey("update_ideas_json")
     }
@@ -34,6 +35,8 @@ class SettingsRepository(private val context: Context) {
         val checkIntervalHours: Int,
         /** Package names the user has chosen to hide from the main list. */
         val hiddenPackages: Set<String>,
+        /** Package names marked abandoned: still listed, but sunk to the bottom and tagged. */
+        val abandonedPackages: Set<String>,
         /** Enables private developer-only affordances in the UI. */
         val developerOptionsEnabled: Boolean,
         /** Update ideas grouped by app package name. */
@@ -47,6 +50,7 @@ class SettingsRepository(private val context: Context) {
             manifestUrl = prefs[Keys.ManifestUrl] ?: BuildConfig.MANIFEST_URL,
             checkIntervalHours = prefs[Keys.CheckIntervalH] ?: 6,
             hiddenPackages = prefs[Keys.HiddenPackages] ?: emptySet(),
+            abandonedPackages = prefs[Keys.AbandonedPackages] ?: emptySet(),
             developerOptionsEnabled = prefs[Keys.DeveloperOptionsEnabled] ?: false,
             updateIdeas = prefs[Keys.UpdateIdeasJson]?.let { json ->
                 runCatching { Json.decodeFromString<Map<String, List<String>>>(json) }.getOrNull()
@@ -67,6 +71,12 @@ class SettingsRepository(private val context: Context) {
         context.dataStore.edit { prefs ->
             val current = prefs[Keys.HiddenPackages] ?: emptySet()
             prefs[Keys.HiddenPackages] = if (hidden) current + packageName else current - packageName
+        }
+
+    suspend fun setAbandoned(packageName: String, abandoned: Boolean) =
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.AbandonedPackages] ?: emptySet()
+            prefs[Keys.AbandonedPackages] = if (abandoned) current + packageName else current - packageName
         }
 
     suspend fun setDeveloperOptionsEnabled(enabled: Boolean) =

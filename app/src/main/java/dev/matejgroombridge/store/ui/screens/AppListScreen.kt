@@ -70,10 +70,12 @@ fun AppListScreen(
 
     val updateCount = nonHidden.count { stateOf(it) is InstallState.UpdateAvailable }
 
-    // Sort: updates first (most actionable), then not-installed (new), then installed.
+    // Sort: abandoned apps always sink to the bottom. Otherwise updates first
+    // (most actionable), then not-installed (new), then installed.
     // Within each group, alphabetical by display name (case-insensitive).
     val visibleApps = nonHidden.sortedWith(
         compareBy<AppEntry>(
+            { it.package_name in settings.abandonedPackages },
             { when (stateOf(it)) {
                 is InstallState.UpdateAvailable -> 0
                 is InstallState.NotInstalled    -> 1
@@ -152,6 +154,7 @@ fun AppListScreen(
                         entry = entry,
                         installState = state.installStates[entry.package_name] ?: InstallState.NotInstalled,
                         actionState = actions[entry.package_name] ?: ActionState.Idle,
+                        isAbandoned = entry.package_name in settings.abandonedPackages,
                         onPrimaryAction = { onPrimaryAction(entry.package_name) },
                         onClick = { onAppClick(entry.package_name) },
                     )

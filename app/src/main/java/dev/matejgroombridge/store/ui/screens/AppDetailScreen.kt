@@ -25,9 +25,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Archive
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Unarchive
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -68,6 +70,7 @@ import dev.matejgroombridge.store.data.model.ActionState
 import dev.matejgroombridge.store.data.model.AppEntry
 import dev.matejgroombridge.store.data.model.InstallState
 import dev.matejgroombridge.store.ui.StoreViewModel
+import dev.matejgroombridge.store.ui.components.AbandonedTag
 import dev.matejgroombridge.store.ui.components.ActionButton
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -91,6 +94,7 @@ fun AppDetailScreen(
     val install = state.installStates[packageName] ?: InstallState.NotInstalled
     val action = actions[packageName] ?: ActionState.Idle
     val isHidden = packageName in settings.hiddenPackages
+    val isAbandoned = packageName in settings.abandonedPackages
     val isInstalled = install is InstallState.Installed || install is InstallState.UpdateAvailable
     val updateIdeas = settings.updateIdeas[packageName].orEmpty()
     var showUpdateIdeas by remember(packageName) { mutableStateOf(false) }
@@ -115,6 +119,12 @@ fun AppDetailScreen(
                         }
                     }
                     if (entry != null) {
+                        IconButton(onClick = { vm.setAbandoned(packageName, !isAbandoned) }) {
+                            Icon(
+                                if (isAbandoned) Icons.Outlined.Unarchive else Icons.Outlined.Archive,
+                                contentDescription = if (isAbandoned) "Unmark as abandoned" else "Mark as abandoned",
+                            )
+                        }
                         // Open eye = visible (currently shown), tap to hide.
                         // Closed eye = hidden, tap to unhide.
                         IconButton(onClick = { vm.setHidden(packageName, !isHidden) }) {
@@ -142,6 +152,7 @@ fun AppDetailScreen(
             install = install,
             action = action,
             isInstalled = isInstalled,
+            isAbandoned = isAbandoned,
             developerOptionsEnabled = settings.developerOptionsEnabled,
             showUpdateIdeas = showUpdateIdeas,
             updateIdeas = updateIdeas,
@@ -161,6 +172,7 @@ private fun DetailContent(
     install: InstallState,
     action: ActionState,
     isInstalled: Boolean,
+    isAbandoned: Boolean,
     developerOptionsEnabled: Boolean,
     showUpdateIdeas: Boolean,
     updateIdeas: List<String>,
@@ -214,6 +226,10 @@ private fun DetailContent(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+                if (isAbandoned) {
+                    Spacer(Modifier.height(6.dp))
+                    AbandonedTag()
+                }
             }
         }
 
