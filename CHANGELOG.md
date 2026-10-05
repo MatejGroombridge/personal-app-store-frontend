@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.3.0 — 2026-10-05
+
+Added abandoned tag and fixed uninstall button
+
+
 ## v1.2.0 — 2026-05-09
 
 Added future update suggestions under Developer options
