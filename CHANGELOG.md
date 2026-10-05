@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v1.3.1 — 2026-10-05
+
+Greyed out Install button for abandoned apps in the list
+
+
 ## v1.3.0 — 2026-10-05
 
 Added abandoned tag and fixed uninstall button
