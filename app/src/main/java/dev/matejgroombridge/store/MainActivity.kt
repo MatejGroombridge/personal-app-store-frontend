@@ -1,5 +1,6 @@
 package dev.matejgroombridge.store
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -151,7 +152,13 @@ class MainActivity : ComponentActivity() {
 
     /** Pops the system "Uninstall this app?" confirmation. */
     private fun handleUninstall(packageName: String) {
-        vm.installs.uninstallIntent(packageName)?.let(::startActivity)
+        val intent = vm.installs.uninstallIntent(packageName) ?: return
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            // No system uninstaller handles ACTION_DELETE — fall back to App Info.
+            startActivity(vm.installs.openAppInfoIntent(packageName))
+        }
     }
 
     /** Kicks off the "Install all updates" chain — picks up the head of the queue. */
