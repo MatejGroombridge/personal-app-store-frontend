@@ -9,6 +9,9 @@
     <!-- Install/update other apps -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <!-- Uninstall other apps. Without this, Android 9+ silently drops ACTION_DELETE. -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+
     <!-- See which of our apps are already installed (Android 11+ visibility rules) -->
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"

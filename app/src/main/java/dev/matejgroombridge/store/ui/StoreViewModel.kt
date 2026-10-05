@@ -76,6 +76,7 @@ class StoreViewModel(
             manifestUrl = BuildConfig.MANIFEST_URL,
             checkIntervalHours = 6,
             hiddenPackages = emptySet(),
+            abandonedPackages = emptySet(),
             developerOptionsEnabled = false,
             updateIdeas = emptyMap(),
         ),
@@ -115,6 +116,10 @@ class StoreViewModel(
     fun setCheckIntervalHours(hours: Int) = viewModelScope.launch { settings.setCheckIntervalHours(hours) }
     fun setHidden(packageName: String, hidden: Boolean) = viewModelScope.launch {
         settings.setHidden(packageName, hidden)
+    }
+
+    fun setAbandoned(packageName: String, abandoned: Boolean) = viewModelScope.launch {
+        settings.setAbandoned(packageName, abandoned)
     }
 
     fun setDeveloperOptionsEnabled(enabled: Boolean) = viewModelScope.launch {

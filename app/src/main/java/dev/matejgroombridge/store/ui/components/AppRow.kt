@@ -42,6 +42,7 @@ fun AppRow(
     onPrimaryAction: () -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isAbandoned: Boolean = false,
 ) {
     Surface(
         onClick = onClick,
@@ -55,14 +56,21 @@ fun AppRow(
                 AppIcon(entry)
                 Spacer(Modifier.width(16.dp))
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        entry.display_name,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.SemiBold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            entry.display_name,
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.SemiBold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f, fill = false),
+                        )
+                        if (isAbandoned) {
+                            Spacer(Modifier.width(8.dp))
+                            AbandonedTag()
+                        }
+                    }
                     Spacer(Modifier.height(2.dp))
                     StatusLine(entry, installState)
                 }
@@ -85,6 +93,24 @@ fun AppRow(
                 )
             }
         }
+    }
+}
+
+/** Small muted pill marking an app the user has abandoned. */
+@Composable
+fun AbandonedTag(modifier: Modifier = Modifier) {
+    Surface(
+        shape = RoundedCornerShape(6.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerHighest,
+        modifier = modifier,
+    ) {
+        Text(
+            "Abandoned",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+        )
     }
 }
 
